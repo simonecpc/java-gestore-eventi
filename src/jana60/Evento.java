@@ -73,9 +73,13 @@ public class Evento {
 		return numPostiPrenotati - 1;
 	}
 
+	public String dataFormattata() {
+		return formatter.format(data);
+	}
+	
 	@Override
 	public String toString() {
-		return data + titolo;
+		return dataFormattata() + titolo;
 	}
 	
 }
