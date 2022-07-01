@@ -80,9 +80,12 @@ public class Evento {
 		return formatter.format(data);
 	}
 	
+	public int getPostiRimasti () {
+		return getNumPostiTot() - getNumPostiPrenotati();
+	}
 	@Override
 	public String toString() {
-		return dataFormattata() + titolo;
+		return "Data: " + dataFormattata() + "; Titolo evento: " + titolo;
 	}
 	
 }
