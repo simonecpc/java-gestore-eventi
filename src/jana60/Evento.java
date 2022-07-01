@@ -21,6 +21,7 @@ public class Evento {
 		validaPosti();
 		prenota();
 		disdici();
+		dataFormattata();
 	}
 
 	public LocalDate getData() {
@@ -35,8 +36,8 @@ public class Evento {
 		return numPostiPrenotati;
 	}
 
-	public void setNumPostiPrenotati(int numPostiPrenotati) {
-		this.numPostiPrenotati = numPostiPrenotati;
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
 	}
 
 	public String getTitolo() {
@@ -49,7 +50,7 @@ public class Evento {
 	
 	public void validaData() throws Exception {
 		if (oggi.isAfter(data)) {
-			throw new Exception ("Non puoi prenotare una vacanza nel passato, riprova.");
+			throw new Exception ("Non puoi prenotare un' evento nel passato, riprova.");
 		}
 	}
 	
@@ -60,17 +61,19 @@ public class Evento {
 	}
 	
 	public int prenota() throws Exception {
-		if (numPostiPrenotati < 0) {
-			throw new Exception ("Inserire un numero positivo di posti prenotati");
+		if (numPostiTot < 0 || oggi.isAfter(data)) {
+			throw new Exception ("Non ci sono più posti disponibili oppure la data è stata superata.");
 		}
-		return numPostiPrenotati + 1;
+		numPostiPrenotati += 1;
+		return numPostiPrenotati;
 	}
 	
 	public int disdici() throws Exception {
-		if (oggi.isAfter(data) || numPostiPrenotati <= 0){
+		if (oggi.isAfter(data) || numPostiPrenotati < 0){
 			throw new Exception ("La data è stata superata oppure i posti prenotati non sono pervenuti");
 		} 
-		return numPostiPrenotati - 1;
+		numPostiPrenotati -= 1;
+		return numPostiPrenotati;
 	}
 
 	public String dataFormattata() {
